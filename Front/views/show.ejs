@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= post.title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <p><a href="/">← Back to all posts</a></p>
+  <h1><%= post.title %></h1>
+  <p>by <%= post.creator_name %> — <%= post.date_created ? new Date(post.date_created).toLocaleString() : 'No Date' %></p>
+  <hr>
+  <p><%= post.body %></p>
+
+  <% if (currentUser && currentUser.user_id === post.creator_user_id) { %>
+    <p><a href="/blogs/<%= post.blog_id %>/edit">✏️ Edit Post</a></p>
+    <form action="/blogs/<%= post.blog_id %>?_method=DELETE" method="POST">
+      <button>Delete</button>
+    </form>
+  <% } %>
+</body>
+</html>
